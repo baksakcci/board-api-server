@@ -2,6 +2,7 @@ package com.example.springauth.service;
 
 import com.example.springauth.domain.entity.Member;
 import com.example.springauth.domain.infra.MemberRepository;
+import com.example.springauth.presentation.dto.LoginRequestDto;
 import com.example.springauth.presentation.dto.SignupRequestDto;
 import com.example.springauth.presentation.dto.SignupResponseDto;
 import lombok.RequiredArgsConstructor;
@@ -23,5 +24,13 @@ public class AuthService {
             member.getEmail(),
             member.getUsername()
             );
+    }
+
+    public void login(LoginRequestDto loginRequestDto) {
+        memberRepository.findByEmailAndPassword(
+            loginRequestDto.getEmail(),
+            loginRequestDto.getPassword()
+        ).orElseThrow();
+
     }
 }
